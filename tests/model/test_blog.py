@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from internblog.model.blog import Blog
+from hakoblog.model.blog import Blog
 
 def test_init():
     now = datetime.now(),

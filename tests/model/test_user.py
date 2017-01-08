@@ -1,4 +1,4 @@
-from internblog.model.user import User
+from hakoblog.model.user import User
 def test_init():
     user = User(
         id = 0,
