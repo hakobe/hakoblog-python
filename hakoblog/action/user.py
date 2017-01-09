@@ -4,6 +4,7 @@ class UserAction():
     @classmethod
     def create(self, db, name):
         now = datetime.now()
+        new_id = db.uuid_short()
         with db.cursor() as cursor:
             cursor.execute(
                 '''
@@ -13,5 +14,6 @@ class UserAction():
                         %s, %s, %s
                     )
                 ''',
-                (db.uuid_short(), name, now.strftime('%Y-%m-%d %H:%M:%S'))
+                (new_id, name, now.strftime('%Y-%m-%d %H:%M:%S'))
             )
+        return new_id
