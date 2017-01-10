@@ -1,2 +1,2 @@
 # hakoblog
-A litle simple blog for my python practice (WIP).
+A little simple blog for my python practice (WIP).
