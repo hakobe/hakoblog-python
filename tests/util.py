@@ -24,17 +24,20 @@ def create_user():
 def create_blog(user = None):
     db = DB()
 
-    if user == None:
+    if user is None:
         user = create_user()
 
     new_blog_id = BlogAction.create(db, owner_id = user.id, title = random_string(10))
     return BlogLoader.find_by_id(db, new_blog_id)
 
-def create_entry():
+def create_entry(blog = None):
     db = DB()
 
+    if blog is None:
+        blog = create_blog()
+
     new_entry_id = EntryAction.post(db,
-        blog_id = create_blog().id,
+        blog_id = blog.id,
         title = random_string(30),
         body = random_string(100),
     )
