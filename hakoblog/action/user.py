@@ -9,11 +9,11 @@ class UserAction():
             cursor.execute(
                 '''
                     INSERT INTO user (
-                        id, name, created
+                        id, name, created, modified
                     ) VALUES (
-                        %s, %s, %s
+                        %s, %s, %s, %s
                     )
                 ''',
-                (new_id, name, now.strftime('%Y-%m-%d %H:%M:%S'))
+                (new_id, name, now, now)
             )
         return new_id

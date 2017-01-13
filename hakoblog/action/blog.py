@@ -9,11 +9,11 @@ class BlogAction():
             cursor.execute(
                 '''
                     INSERT INTO blog (
-                        id, owner_id, title, created
+                        id, owner_id, title, created, modified
                     ) VALUES (
-                        %s, %s, %s, %s
+                        %s, %s, %s, %s, %s
                     )
                 ''',
-                (new_id, owner_id, title, now.strftime('%Y-%m-%d %H:%M:%S'))
+                (new_id, owner_id, title, now, now)
             )
         return new_id
