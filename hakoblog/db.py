@@ -1,12 +1,14 @@
 import MySQLdb
 import MySQLdb.cursors
+from hakoblog.config import CONFIG
 
 class DB():
     def __init__(self):
         self.conn = MySQLdb.connect(
-            host = 'localhost',
-            user = 'root',
-            db = 'hakoblog',
+            db = CONFIG.DATABASE,
+            host = CONFIG.DATABASE_HOST,
+            user = CONFIG.DATABASE_USER,
+            password = CONFIG.DATABASE_PASS,
             cursorclass = MySQLdb.cursors.DictCursor,
         )
         self.conn.autocommit(True)
