@@ -32,3 +32,14 @@ class EntryAction():
                 ''',
                 (title, body, now, entry_id)
             )
+
+    @classmethod
+    def delete(cls, db, entry_id):
+        with db.cursor() as cursor:
+            cursor.execute(
+                '''
+                DELETE FROM entry
+                WHERE id = %s
+                ''',
+                (entry_id,)
+            )
