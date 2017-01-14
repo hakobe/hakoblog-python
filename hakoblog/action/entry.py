@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 class EntryAction():
     @classmethod
     def post(cls, db, blog_id, title, body):

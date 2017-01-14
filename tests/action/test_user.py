@@ -6,6 +6,7 @@ from hakoblog.action.user import UserAction
 
 from tests.util import random_string
 
+
 def test_create():
     db = DB()
 

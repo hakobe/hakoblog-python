@@ -6,6 +6,7 @@ from hakoblog.loader.blog import BlogLoader
 
 from tests.util import random_string, create_user
 
+
 def test_create():
     db = DB()
 
@@ -13,11 +14,11 @@ def test_create():
     title = random_string(10)
     blog_id = BlogAction.create(
         db,
-        owner_id = user.id,
-        title = title,
+        owner_id=user.id,
+        title=title,
     )
     found_blog = BlogLoader.find_by_id(db, blog_id)
 
-    eq_( found_blog.id, blog_id )
-    eq_( found_blog.owner_id, user.id )
-    eq_( found_blog.title, title )
+    eq_(found_blog.id, blog_id)
+    eq_(found_blog.owner_id, user.id)
+    eq_(found_blog.title, title)

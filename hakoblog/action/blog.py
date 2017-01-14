@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 class BlogAction():
     @classmethod
     def create(self, db, owner_id, title):

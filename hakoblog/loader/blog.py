@@ -1,5 +1,6 @@
 from hakoblog.model.blog import Blog
 
+
 class BlogLoader():
     @classmethod
     def find_by_id(cls, db, blog_id):

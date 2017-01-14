@@ -1,5 +1,5 @@
-from datetime import datetime
 from hakoblog.model.entry import Entry
+
 
 class EntryLoader():
     @classmethod

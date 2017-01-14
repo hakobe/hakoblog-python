@@ -1,4 +1,6 @@
 from hakoblog.model.user import User
+
+
 class UserLoader():
     @classmethod
     def find_by_name(cls, db, name):

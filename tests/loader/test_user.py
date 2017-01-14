@@ -6,6 +6,7 @@ from hakoblog.loader.user import UserLoader
 
 from tests.util import random_string, create_user
 
+
 def test_find_by_name():
     db = DB()
 
