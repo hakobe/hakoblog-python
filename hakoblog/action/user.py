@@ -24,7 +24,7 @@ class UserAction():
 
     @classmethod
     def ensure_global_user_created(cls, db):
-        global_user_name = CONFIG.HAKOBLOG_USER
+        global_user_name = CONFIG.GLOBAL_USER_NAME
         user = UserLoader.find_by_name(db, global_user_name)
         if user is None:
             cls.create(db, global_user_name)

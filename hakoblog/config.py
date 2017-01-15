@@ -10,7 +10,7 @@ class Config():
     DATABASE_USER = 'root'
     DATABASE_PASS = ''
     TESTING = False
-    HAKOBLOG_USER = 'hakobe'
+    GLOBAL_USER_NAME = 'hakobe'
 
 
 class Test(Config):

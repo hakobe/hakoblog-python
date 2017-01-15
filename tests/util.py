@@ -61,10 +61,10 @@ def create_entry(blog=None):
 
 @contextmanager
 def global_user(name):
-    prev_name = CONFIG.HAKOBLOG_USER
-    CONFIG.HAKOBLOG_USER = name
+    prev_name = CONFIG.GLOBAL_USER_NAME
+    CONFIG.GLOBAL_USER_NAME = name
     yield name
-    CONFIG.HAKOBLOG_USER = prev_name
+    CONFIG.GLOBAL_USER_NAME = prev_name
 
 
 def web_client():
