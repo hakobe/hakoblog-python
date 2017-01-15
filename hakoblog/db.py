@@ -11,7 +11,7 @@ class DB():
             user=CONFIG.DATABASE_USER,
             password=CONFIG.DATABASE_PASS,
             cursorclass=MySQLdb.cursors.DictCursor,
-            charset='utf-8',
+            charset='utf8',
         )
         self.conn.autocommit(True)
 
