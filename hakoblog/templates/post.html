@@ -1,0 +1,12 @@
+{% extends "_wrapper.html" %}
+{% block content %}
+<section class="post">
+  <form class="post-form" method="POST" action="/-/post">
+    <input type="text" name="title"><br />
+    <textarea name="body">
+    </textarea><br />
+    <input type="hidden" name="blog_id" value="{{ blog.id }}">
+    <input type="submit" value="Post">
+  </form>
+</section>
+{% endblock %}

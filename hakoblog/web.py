@@ -1,9 +1,15 @@
-from flask import Flask, render_template, g as flask_g
+from flask import (
+    Flask,
+    g as flask_g,
+    render_template,
+    request, abort, url_for, redirect,
+)
 
 from hakoblog.db import DB
 from hakoblog.config import CONFIG
 from hakoblog.action.blog import BlogAction
 from hakoblog.loader.entry import EntryLoader
+from hakoblog.action.entry import EntryAction
 
 
 web = Flask(__name__)
@@ -30,3 +36,31 @@ def index():
     entries = EntryLoader.find_entries(get_db(), blog.id, limit=5)
 
     return render_template('index.html', blog=blog, entries=entries)
+
+
+@web.route('/-/post', methods=['GET'])
+def post_get():
+    blog = BlogAction.ensure_global_blog_created(get_db())
+
+    return render_template('post.html', blog=blog)
+
+
+@web.route('/-/post', methods=['POST'])
+def post_post():
+    blog = BlogAction.ensure_global_blog_created(get_db())
+
+    title = request.form['title']
+    body = request.form['body']
+    blog_id = int(request.form['blog_id'])
+
+    if int(blog_id) != blog.id:
+        abort(400)
+
+    EntryAction.post(
+        get_db(),
+        blog_id=blog.id,
+        title=title,
+        body=body,
+    )
+
+    return redirect(url_for('index'))
