@@ -1,14 +1,15 @@
 import tests.hakoblog  # noqa: F401
 
-from nose.tools import eq_, assert_regex
+from nose.tools import eq_
 from pyquery import PyQuery as pq
 
-from tests.util import web_client
+from tests.util import web_client, global_user, random_string
 
 
 def test_index():
-    res = web_client().get('/')
-    eq_(res.status, '200 OK')
+    with global_user(random_string(5)) as global_user_name:
+        res = web_client().get('/')
+        eq_(res.status, '200 OK')
 
-    d = pq(res.data)
-    assert_regex(d('h1').text(), r'Welcome')
+        d = pq(res.data)
+        eq_(d('h1').text(), "%s's blog" % (global_user_name, ))

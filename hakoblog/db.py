@@ -17,6 +17,9 @@ class DB():
     def cursor(self):
         return self.conn.cursor()
 
+    def close(self):
+        self.conn.close()
+
     def uuid_short(self):
         with self.conn.cursor() as cursor:
             cursor.execute('SELECT UUID_SHORT() as uuid')
