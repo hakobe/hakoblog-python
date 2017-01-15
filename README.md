@@ -18,3 +18,6 @@ $ nosetest tests
 # run
 $ FLASK_APP=hakoblog/web.py flask run
 ```
+
+# Usage
+See hakoblog/web.py please :relaxed:.
