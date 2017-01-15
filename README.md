@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/hakobe/hakoblog-python.svg?branch=master)](https://travis-ci.org/hakobe/hakoblog-python)
+
 # hakoblog
 A little simple blog for my python practice.
 
