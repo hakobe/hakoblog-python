@@ -24,9 +24,9 @@ def test_ensure_global_user_created():
     with global_user(random_string(10)) as global_user_name:
         assert_is_none(UserLoader.find_by_name(db, global_user_name))
 
-        UserAction.ensure_global_user_created(db)
-
-        found_user = UserLoader.find_by_name(db, global_user_name)
-        eq_(found_user.name, global_user_name)
-
-        UserAction.ensure_global_user_created(db)  # Check no exeception raises
+        user = UserAction.ensure_global_user_created(db)
+        eq_(user.name, global_user_name)
+        
+        # Check no exceptions raises
+        user_again = UserAction.ensure_global_user_created(db)
+        eq_(user_again.id, user.id)

@@ -27,5 +27,6 @@ class UserAction():
         global_user_name = CONFIG.HAKOBLOG_USER
         user = UserLoader.find_by_name(db, global_user_name)
         if user is None:
-            user = cls.create(db, global_user_name)
+            cls.create(db, global_user_name)
+            user = UserLoader.find_by_name(db, global_user_name)
         return user
