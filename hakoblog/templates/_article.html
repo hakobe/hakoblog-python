@@ -1,0 +1,10 @@
+{% macro article(entry) -%}
+<article class="entry" data-entry-id="{{ entry.id }}">
+  <div class="entry-header">
+    <span class="entry-title">{{ entry.title }}</span>
+  </div>
+  <div class="entry-body">
+    {{ entry.body }}
+  </div>
+</article>
+{%- endmacro %}

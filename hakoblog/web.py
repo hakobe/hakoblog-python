@@ -3,6 +3,7 @@ from flask import Flask, render_template, g as flask_g
 from hakoblog.db import DB
 from hakoblog.config import CONFIG
 from hakoblog.action.blog import BlogAction
+from hakoblog.loader.entry import EntryLoader
 
 
 web = Flask(__name__)
@@ -26,5 +27,6 @@ def close_connection(exception):
 @web.route('/')
 def index():
     blog = BlogAction.ensure_global_blog_created(get_db())
+    entries = EntryLoader.find_entries(get_db(), blog.id, limit=5)
 
-    return render_template('index.html', blog=blog)
+    return render_template('index.html', blog=blog, entries=entries)
