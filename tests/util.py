@@ -13,6 +13,8 @@ from hakoblog.loader.blog import BlogLoader
 from hakoblog.action.entry import EntryAction
 from hakoblog.loader.entry import EntryLoader
 
+from hakoblog.web import web
+
 
 def random_string(length, seq=string.digits + string.ascii_letters):
     sr = random.SystemRandom()
@@ -53,3 +55,7 @@ def create_entry(blog=None):
         body=random_string(100),
     )
     return EntryLoader.find_by_id(db, new_entry_id)
+
+
+def web_client():
+    return web.test_client()
