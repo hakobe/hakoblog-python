@@ -1,4 +1,3 @@
-
 # hakoblog
 [![Build Status](https://travis-ci.org/hakobe/hakoblog-python.svg?branch=master)](https://travis-ci.org/hakobe/hakoblog-python)
 
@@ -21,3 +20,9 @@ $ FLASK_APP=hakoblog/web.py flask run
 
 # Usage
 See hakoblog/web.py please :relaxed:.
+
+# Lisense
+[MIT](./LICENSE)
+
+## Author
+[hakobe](http://github.com/hakobe)IT
