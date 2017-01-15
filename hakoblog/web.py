@@ -38,6 +38,19 @@ def index():
     return render_template('index.html', blog=blog, entries=entries)
 
 
+@web.route('/entry/<int:entry_id>')
+def entry(entry_id):
+    blog = BlogAction.ensure_global_blog_created(get_db())
+
+    entry = EntryLoader.find_by_id(get_db(), entry_id)
+    if entry is None:
+        abort(404)
+    if entry.blog_id != blog.id:
+        abort(403)
+
+    return render_template('entry.html', blog=blog, entry=entry)
+
+
 @web.route('/-/post', methods=['GET'])
 def post_get():
     blog = BlogAction.ensure_global_blog_created(get_db())

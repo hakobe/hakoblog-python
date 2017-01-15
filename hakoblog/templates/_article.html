@@ -1,7 +1,8 @@
 {% macro article(entry) -%}
 <article class="entry" data-entry-id="{{ entry.id }}">
   <div class="entry-header">
-    <span class="entry-datetime">{{ entry.created }}</span><span class="entry-title">{{ entry.title }}</span>
+    <span class="entry-title"><a href="{{ url_for('entry', entry_id=entry.id) }}">{{ entry.title }}</a></span>
+    <span class="entry-datetime">{{ entry.created }}</span>
   </div>
   <div class="entry-body">
     {{ entry.body }}
