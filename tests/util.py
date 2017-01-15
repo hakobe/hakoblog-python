@@ -2,7 +2,9 @@ import tests.hakoblog  # noqa: F401
 
 import random
 import string
+from contextlib import contextmanager
 
+from hakoblog.config import CONFIG
 from hakoblog.db import DB
 from hakoblog.action.user import UserAction
 from hakoblog.loader.user import UserLoader
@@ -55,6 +57,14 @@ def create_entry(blog=None):
         body=random_string(100),
     )
     return EntryLoader.find_by_id(db, new_entry_id)
+
+
+@contextmanager
+def global_user(name):
+    prev_name = CONFIG.HAKOBLOG_USER
+    CONFIG.HAKOBLOG_USER = name
+    yield name
+    CONFIG.HAKOBLOG_USER = prev_name
 
 
 def web_client():

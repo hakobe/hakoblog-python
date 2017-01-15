@@ -1,12 +1,12 @@
 import tests.hakoblog  # noqa: F401
 
-from nose.tools import eq_
+from nose.tools import eq_, assert_is_none
 
 from hakoblog.db import DB
 from hakoblog.loader.user import UserLoader
 from hakoblog.action.user import UserAction
 
-from tests.util import random_string
+from tests.util import random_string, global_user
 
 
 def test_create():
@@ -16,3 +16,17 @@ def test_create():
     UserAction.create(db, name)
     user = UserLoader.find_by_name(db, name)
     eq_(user.name, name)
+
+
+def test_ensure_global_user_created():
+    db = DB()
+
+    with global_user(random_string(10)) as global_user_name:
+        assert_is_none(UserLoader.find_by_name(db, global_user_name))
+
+        UserAction.ensure_global_user_created(db)
+
+        found_user = UserLoader.find_by_name(db, global_user_name)
+        eq_(found_user.name, global_user_name)
+
+        UserAction.ensure_global_user_created(db)  # Check no exeception raises
