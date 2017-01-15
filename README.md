@@ -19,10 +19,10 @@ $ FLASK_APP=hakoblog/web.py flask run
 ```
 
 # Usage
-See hakoblog/web.py please :relaxed:.
+See hakoblog/web.py please :relaxed:
 
 # Lisense
 [MIT](./LICENSE)
 
 ## Author
-[hakobe](http://github.com/hakobe)IT
+[hakobe](http://github.com/hakobe)
