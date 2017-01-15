@@ -1,3 +1,5 @@
+import tests.hakoblog  # noqa: F401
+
 from nose.tools import eq_, assert_is_instance
 from freezegun import freeze_time
 

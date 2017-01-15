@@ -1,3 +1,5 @@
+import tests.hakoblog  # noqa: F401
+
 from nose.tools import eq_, assert_is_none
 
 from hakoblog.db import DB

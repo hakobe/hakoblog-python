@@ -1,3 +1,5 @@
+import tests.hakoblog  # noqa: F401
+
 from nose.tools import eq_
 
 from hakoblog.db import DB

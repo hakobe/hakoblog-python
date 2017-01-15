@@ -1,3 +1,5 @@
+import tests.hakoblog  # noqa: F401
+
 from datetime import datetime
 
 from hakoblog.model.entry import Entry

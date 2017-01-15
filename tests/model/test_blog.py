@@ -1,3 +1,5 @@
+import tests.hakoblog  # noqa: F401
+
 from hakoblog.model.blog import Blog
 
 
