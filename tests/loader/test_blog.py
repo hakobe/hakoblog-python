@@ -1,7 +1,5 @@
 import tests.hakoblog  # noqa: F401
 
-from nose.tools import eq_, assert_is_none
-
 from hakoblog.db import DB
 from hakoblog.loader.blog import BlogLoader
 
@@ -16,9 +14,9 @@ def test_find_by_id():
 
     found_blog = BlogLoader.find_by_id(db, blog.id)
 
-    eq_(found_blog.id, blog.id)
+    assert found_blog.id == blog.id
 
-    assert_is_none(BlogLoader.find_by_id(db, -1))
+    assert BlogLoader.find_by_id(db, -1) is None
 
 
 def test_find_by_owner_id():
@@ -28,6 +26,6 @@ def test_find_by_owner_id():
 
     found_blog = BlogLoader.find_by_owner_id(db, blog.owner_id)
 
-    eq_(found_blog.id, blog.id)
+    assert found_blog.id == blog.id
 
-    assert_is_none(BlogLoader.find_by_owner_id(db, -1))
+    assert BlogLoader.find_by_owner_id(db, -1) is None

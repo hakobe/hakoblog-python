@@ -1,7 +1,5 @@
 import tests.hakoblog  # noqa: F401
 
-from nose.tools import eq_, assert_is_none
-
 from hakoblog.db import DB
 from hakoblog.loader.user import UserLoader
 from hakoblog.action.blog import BlogAction
@@ -22,22 +20,22 @@ def test_create():
     )
     found_blog = BlogLoader.find_by_id(db, blog_id)
 
-    eq_(found_blog.id, blog_id)
-    eq_(found_blog.owner_id, user.id)
-    eq_(found_blog.title, title)
+    assert found_blog.id == blog_id
+    assert found_blog.owner_id == user.id
+    assert found_blog.title == title
 
 
 def test_ensure_global_blog_created():
     db = DB()
 
     with global_user(random_string(10)) as global_user_name:
-        assert_is_none(UserLoader.find_by_name(db, global_user_name))
+        assert UserLoader.find_by_name(db, global_user_name) is None
 
         blog = BlogAction.ensure_global_blog_created(db)
 
         found_user = UserLoader.find_by_name(db, global_user_name)
-        eq_(blog.owner_id, found_user.id)
+        assert blog.owner_id == found_user.id
 
         # Check no exeception raises
         blog_again = BlogAction.ensure_global_blog_created(db)
-        eq_(blog_again.id, blog.id)
+        assert blog_again.id == blog.id
