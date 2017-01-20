@@ -1,6 +1,5 @@
 import tests.hakoblog  # noqa: F401
 
-from nose.tools import eq_
 from pyquery import PyQuery as pq
 from freezegun import freeze_time
 
@@ -13,10 +12,10 @@ from tests.util import web_client, global_user, random_string, create_entry
 def test_index():
     with global_user(random_string(5)) as global_user_name:
         res = web_client().get('/')
-        eq_(res.status, '200 OK')
+        assert res.status == '200 OK'
 
         d = pq(res.data)
-        eq_(d('h1').text(), "%s's blog" % (global_user_name, ))
+        assert d('h1').text() == "%s's blog" % (global_user_name, )
 
 
 def test_index_with_entries():
@@ -33,11 +32,10 @@ def test_index_with_entries():
             entries.append(create_entry(blog=blog))
 
         res = web_client().get('/')
-        eq_(res.status, '200 OK')
+        assert res.status == '200 OK'
 
         d = pq(res.data)
 
-        eq_(
-            [int(d(a).attr('data-entry-id')) for a in d('.entry')],
-            [e.id for e in entries]
-        )
+        assert [
+            int(d(a).attr('data-entry-id')) for a in d('.entry')
+        ] == [e.id for e in entries]

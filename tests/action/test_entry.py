@@ -1,7 +1,5 @@
 import tests.hakoblog  # noqa: F401
 
-from nose.tools import eq_, assert_is_none
-
 from hakoblog.db import DB
 from hakoblog.action.entry import EntryAction
 from hakoblog.loader.entry import EntryLoader
@@ -22,9 +20,9 @@ def test_post():
     )
 
     found_entry = EntryLoader.find_by_id(db, entry_id)
-    eq_(found_entry.blog_id, blog.id)
-    eq_(found_entry.title, 'タイトル')
-    eq_(found_entry.body, 'こんにちは')
+    assert found_entry.blog_id == blog.id
+    assert found_entry.title == 'タイトル'
+    assert found_entry.body == 'こんにちは'
 
 
 def test_edit():
@@ -47,9 +45,9 @@ def test_edit():
     )
 
     found_entry = EntryLoader.find_by_id(db, entry_id)
-    eq_(found_entry.blog_id, blog.id)
-    eq_(found_entry.title, 'タイトルafter')
-    eq_(found_entry.body, 'こんにちはafter')
+    assert found_entry.blog_id == blog.id
+    assert found_entry.title == 'タイトルafter'
+    assert found_entry.body == 'こんにちはafter'
 
 
 def test_delete():
@@ -60,4 +58,4 @@ def test_delete():
     EntryAction.delete(db, entry.id)
     found_entry = EntryLoader.find_by_id(db, entry.id)
 
-    assert_is_none(found_entry)
+    assert found_entry is None

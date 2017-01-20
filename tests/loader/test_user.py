@@ -1,7 +1,5 @@
 import tests.hakoblog  # noqa: F401
 
-from nose.tools import assert_is_instance, eq_
-
 from hakoblog.db import DB
 from hakoblog.model.user import User
 from hakoblog.loader.user import UserLoader
@@ -15,8 +13,8 @@ def test_find_by_name():
     user = create_user()
 
     found_user = UserLoader.find_by_name(db, user.name)
-    assert_is_instance(found_user, User)
-    eq_(found_user.name, user.name)
+    assert isinstance(found_user, User)
+    assert found_user.name == user.name
 
     not_found_user = UserLoader.find_by_name(db, random_string(10))
-    eq_(not_found_user, None)
+    assert not_found_user is None
