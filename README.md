@@ -8,8 +8,7 @@ A little simple blog for my python practice.
 ```sh
 # setup
 $ pip install -r requirements.txt
-$ mysqladmin -uroot create hakoblog
-$ cat db/schema.sql| mysql -uroot hakoblog
+$ make setupdb
 
 # test
 $ pytest tests
