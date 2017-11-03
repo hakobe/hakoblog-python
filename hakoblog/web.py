@@ -29,6 +29,15 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
+@web.after_request
+def add_secure_headers(response):
+    print(response)
+    response.headers.add('X-Frame-Options', 'DENY')
+    response.headers.add('X-Content-Type-Options', 'nosniff')
+    response.headers.add('X-XSS-Protection', '1;mode=block')
+    response.headers.add('Content-Security-Policy', "default-src 'self'")
+    return response
+
 
 @web.route('/')
 def index():
