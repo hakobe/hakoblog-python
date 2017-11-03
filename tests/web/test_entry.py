@@ -17,8 +17,6 @@ def test_entry():
         res1 = web_client().get('/entry/' + str(entry.id))
         assert res1.status == '200 OK'
         d = pq(res1.data)
-        print('.entry[data-entry-id="%d"]' % (entry.id, ))
-        print(d('.entry[data-entry-id="%d"]' % (entry.id, )))
 
         res2 = web_client().get('/entry/0')
         assert res2.status == '404 NOT FOUND'
