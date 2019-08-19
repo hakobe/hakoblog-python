@@ -6,7 +6,7 @@ class Config():
     This is also used for flask application config.
     '''
     DATABASE = 'hakoblog'
-    DATABASE_HOST = 'localhost'
+    DATABASE_HOST = 'db'
     DATABASE_USER = 'root'
     DATABASE_PASS = ''
     TESTING = False
