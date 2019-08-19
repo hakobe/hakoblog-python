@@ -2,7 +2,10 @@ from flask import (
     Flask,
     g as flask_g,
     render_template,
-    request, abort, url_for, redirect,
+    request,
+    abort,
+    url_for,
+    redirect,
 )
 
 from hakoblog.db import DB
@@ -17,7 +20,7 @@ web.config.from_object(CONFIG)
 
 
 def get_db():
-    db = getattr(flask_g, '_database', None)
+    db = getattr(flask_g, "_database", None)
     if db is None:
         db = flask_g._database = DB()
     return db
@@ -25,29 +28,30 @@ def get_db():
 
 @web.teardown_appcontext
 def close_connection(exception):
-    db = getattr(flask_g, '_database', None)
+    db = getattr(flask_g, "_database", None)
     if db is not None:
         db.close()
+
 
 @web.after_request
 def add_secure_headers(response):
     print(response)
-    response.headers.add('X-Frame-Options', 'DENY')
-    response.headers.add('X-Content-Type-Options', 'nosniff')
-    response.headers.add('X-XSS-Protection', '1;mode=block')
-    response.headers.add('Content-Security-Policy', "default-src 'self'")
+    response.headers.add("X-Frame-Options", "DENY")
+    response.headers.add("X-Content-Type-Options", "nosniff")
+    response.headers.add("X-XSS-Protection", "1;mode=block")
+    response.headers.add("Content-Security-Policy", "default-src 'self'")
     return response
 
 
-@web.route('/')
+@web.route("/")
 def index():
     blog = BlogAction.ensure_global_blog_created(get_db())
     entries = EntryLoader.find_entries(get_db(), blog.id, limit=5)
 
-    return render_template('index.html', blog=blog, entries=entries)
+    return render_template("index.html", blog=blog, entries=entries)
 
 
-@web.route('/entry/<int:entry_id>')
+@web.route("/entry/<int:entry_id>")
 def entry(entry_id):
     blog = BlogAction.ensure_global_blog_created(get_db())
 
@@ -57,32 +61,27 @@ def entry(entry_id):
     if entry.blog_id != blog.id:
         abort(403)
 
-    return render_template('entry.html', blog=blog, entry=entry)
+    return render_template("entry.html", blog=blog, entry=entry)
 
 
-@web.route('/-/post', methods=['GET'])
+@web.route("/-/post", methods=["GET"])
 def post_get():
     blog = BlogAction.ensure_global_blog_created(get_db())
 
-    return render_template('post.html', blog=blog)
+    return render_template("post.html", blog=blog)
 
 
-@web.route('/-/post', methods=['POST'])
+@web.route("/-/post", methods=["POST"])
 def post_post():
     blog = BlogAction.ensure_global_blog_created(get_db())
 
-    title = request.form['title']
-    body = request.form['body']
-    blog_id = int(request.form['blog_id'])
+    title = request.form["title"]
+    body = request.form["body"]
+    blog_id = int(request.form["blog_id"])
 
     if int(blog_id) != blog.id:
         abort(400)
 
-    EntryAction.post(
-        get_db(),
-        blog_id=blog.id,
-        title=title,
-        body=body,
-    )
+    EntryAction.post(get_db(), blog_id=blog.id, title=title, body=body)
 
-    return redirect(url_for('index'))
+    return redirect(url_for("index"))

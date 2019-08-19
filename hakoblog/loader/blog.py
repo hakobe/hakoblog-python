@@ -1,18 +1,18 @@
 from hakoblog.model.blog import Blog
 
 
-class BlogLoader():
+class BlogLoader:
     @classmethod
     def find_by_id(cls, db, blog_id):
         with db.cursor() as cursor:
             cursor.execute(
-                '''
+                """
                 SELECT id, owner_id, title
                 FROM blog
                 WHERE id = %s
                 LIMIT 1
-                ''',
-                (blog_id, )
+                """,
+                (blog_id,),
             )
             row = cursor.fetchone()
 
@@ -25,13 +25,13 @@ class BlogLoader():
     def find_by_owner_id(cls, db, owner_id):
         with db.cursor() as cursor:
             cursor.execute(
-                '''
+                """
                 SELECT id, owner_id, title
                 FROM blog
                 WHERE owner_id = %s
                 LIMIT 1
-                ''',
-                (owner_id, )
+                """,
+                (owner_id,),
             )
             row = cursor.fetchone()
 

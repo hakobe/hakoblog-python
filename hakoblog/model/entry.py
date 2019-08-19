@@ -1,4 +1,4 @@
-class Entry():
+class Entry:
     def __init__(self, id, blog_id, title, body, created, modified):
         self.id = id
         self.blog_id = blog_id

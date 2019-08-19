@@ -3,7 +3,7 @@ import MySQLdb.cursors
 from hakoblog.config import CONFIG
 
 
-class DB():
+class DB:
     def __init__(self):
         self.conn = MySQLdb.connect(
             db=CONFIG.DATABASE,
@@ -11,7 +11,7 @@ class DB():
             user=CONFIG.DATABASE_USER,
             password=CONFIG.DATABASE_PASS,
             cursorclass=MySQLdb.cursors.DictCursor,
-            charset='utf8',
+            charset="utf8",
         )
         self.conn.autocommit(True)
 
@@ -23,5 +23,5 @@ class DB():
 
     def uuid_short(self):
         with self.conn.cursor() as cursor:
-            cursor.execute('SELECT UUID_SHORT() as uuid')
-            return cursor.fetchone().get('uuid')
+            cursor.execute("SELECT UUID_SHORT() as uuid")
+            return cursor.fetchone().get("uuid")
