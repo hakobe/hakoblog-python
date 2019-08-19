@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  app:
+    build:
+      dockerfile: ./Dockerfile
+      context: ../
+    volumes:
+      - ..:/app
+    command: /bin/sh -c "while sleep 1000; do :; done"
