@@ -1,0 +1,20 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+flake8 = "*"
+pycodestyle = "*"
+pyflakes = "*"
+freezegun = "*"
+pytest = "*"
+pyquery = "*"
+
+[packages]
+mysqlclient = "*"
+Flask = "*"
+Jinja2 = "*"
+
+[requires]
+python_version = "3.7"
