@@ -14,9 +14,6 @@ down:
 test:
 	docker-compose run --rm app pytest
 
-.PHONY: setupdb
+.PHONY: prepare-db
 prepare-db:
-	- docker-compose run --rm app mysqladmin -uroot -hdb create hakoblog
-	cat db/schema.sql | docker-compose run --rm db mysql -uroot -hdb hakoblog
-	- docker-compose run --rm app mysqladmin -uroot -hdb create hakoblog_test
-	cat db/schema.sql | docker-compose run --rm db mysql -uroot -hdb hakoblog_test
+	docker-compose run --rm app ./prepare-db.sh

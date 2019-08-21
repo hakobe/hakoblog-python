@@ -7,3 +7,12 @@ services:
     volumes:
       - ..:/app
     command: /bin/sh -c "while sleep 1000; do :; done"
+  db:
+    image: mysql:5.6
+    volumes:
+      - db-data:/var/lib/mysql/data
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+volumes:
+  db-data:
+
